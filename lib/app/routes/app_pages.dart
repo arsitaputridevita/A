@@ -1,15 +1,20 @@
 import 'package:get/get.dart';
+import 'package:myapp/app/modules/button_menu/views/bottom_menu_view.dart';
+import 'package:myapp/app/modules/kategori/views/create_kategori_view.dart';
+import 'package:myapp/app/modules/kategori/views/edit_kategori_view.dart';
+import 'package:myapp/app/modules/kategori/views/show_kategori_view.dart';
 
 import '../middlewares/auth_middleware.dart';
 import '../modules/biodata/bindings/biodata_binding.dart';
 import '../modules/biodata/views/biodata_view.dart';
 import '../modules/biodata/views/output_biodata.dart';
 import '../modules/button_menu/bindings/button_menu_binding.dart';
-import '../modules/button_menu/views/button_menu_view.dart';
 import '../modules/counter/bindings/counter_binding.dart';
 import '../modules/counter/views/counter_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/kategori/bindings/kategori_binding.dart';
+import '../modules/kategori/views/kategori_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
@@ -62,19 +67,38 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => ProfileView(),
       binding: ProfileBinding(),
-       middlewares: [AuthMiddleware()],
+      middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: _Paths.BUTTON_MENU,
-      page: () => ButtonMenuView(),
-      binding: ButtonMenuBinding(),
-       middlewares: [AuthMiddleware()],
+      page: () => BottomMenuView(),
+      binding: BottomMenuBinding(),
+      middlewares: [AuthMiddleware()],
+    ),
+    GetPage(
+      name: _Paths.KATEGORI,
+      page: () => KategoriView(),
+      binding: KategoriBinding(),
+      middlewares: [AuthMiddleware()],
+    ),
+    GetPage(
+      name:  Routes.CREATE_KATEGORI,
+      page: () => CreateKategoriView(),
+      binding: KategoriBinding(),
+      middlewares: [AuthMiddleware()],
+    ),
+  GetPage(
+      name:  Routes.EDIT_KATEGORI,
+      page: () => EditKategoriView(),
+      binding: KategoriBinding(),
+      middlewares: [AuthMiddleware()],
+    ),
+    GetPage(
+      name:  Routes.SHOW_KATEGORI,
+      page: () => ShowKategoriView(),
+      binding: KategoriBinding(),
+      middlewares: [AuthMiddleware()],
     ),
   ];
 }
 
-ProfileView() {
-}
-
-ButtonMenuView() {
-}

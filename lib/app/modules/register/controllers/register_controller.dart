@@ -1,5 +1,5 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../utils/api.dart';
@@ -9,8 +9,6 @@ class RegisterController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   var isLoading = false.obs;
-
-
 
   Future<void> register() async {
     isLoading(true);
@@ -23,17 +21,18 @@ class RegisterController extends GetxController {
         'password': passwordController.text,
       },
     );
+
     if (response.statusCode == 201) {
-      Get.snackbar('Success', 'Registration successful',
+      Get.snackbar('Success', 'Registration Successfully',
           snackPosition: SnackPosition.BOTTOM);
       Get.offAllNamed('/login');
     } else {
-      Get.snackbar('Error', 'Registration failed. Please try again.',
+      Get.snackbar('Error', 'Registration failed, please try again',
           snackPosition: SnackPosition.BOTTOM);
-      Get.offAllNamed('/register');
     }
-    isLoading.value = false;
+    isLoading(false);
   }
+
   @override
   void dispose() {
     nameController.dispose();

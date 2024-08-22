@@ -1,42 +1,55 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:get/get.dart';
 
-import '../../../utils/api.dart';
+import '../controllers/profile_controller.dart';
 
-class ProfileController extends GetxController {
-  final box = GetStorage();
-  var userProfile = {}.obs;
-  var isLoading = false.obs;
-
+class ProfileView extends GetView<ProfileController> {
   @override
-  void onInit() {
-    super.onInit();
-    fetchUserProfile();
-  }
+  final ProfileController controller = Get.put(ProfileController());
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Profile'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () => controller.logout(),
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Obx(
+          () {
+            if (controller.isLoading.value) {
+              return Center(child: CircularProgressIndicator());
+            }
 
-  void logout() {
-    box.remove('access_token');
-    Get.offAllNamed('/login');
-  }
-
-  Future<void> fetchUserProfile() async {
-    isLoading(true);
-    final token = box.read('access_token');
-    final url = Uri.parse('${BaseUrl.api}/profile');
-    final response = await http.get(
-      url,
-      headers: {'Authorization': 'Bearer $token'},
+            final user = controller.userProfile;
+            return user.isEmpty
+                ? Center(child: Text('No profile data'))
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Name: ${user['name']}',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Email: ${user['email']}',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        'Joined: ${user['created_at']}',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  );
+          },
+        ),
+      ),
     );
-
-    if (response.statusCode == 200) {
-      userProfile.value = json.decode(response.body);
-  } else {
-    Get.snackbar('Error', 'Failed to load profile',
-        snackPosition: SnackPosition.BOTTOM);
   }
-  isLoading(false);
- }
 }

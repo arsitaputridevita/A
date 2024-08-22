@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
 
-import '../controllers/button_menu_controller.dart';
+import '../controllers/bottom_menu_controller.dart';
 
-class ButtonMenuBinding extends Bindings {
+class BottomMenuBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ButtonMenuController>(
-      () => ButtonMenuController(),
+    Get.lazyPut<BottomMenuController>(
+      () => BottomMenuController(),
     );
   }
 }
