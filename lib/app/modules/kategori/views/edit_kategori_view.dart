@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapp/app/data/kategori/kategori_model.dart';
+import '../../../data/kategori_model.dart';
 import '../controllers/kategori_controller.dart';
 
 class EditKategoriView extends StatelessWidget {
   final KategoriController controller = Get.find();
-
   final TextEditingController namaKategoriController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final Datakategori kategori = Get.arguments;
     namaKategoriController.text = kategori.namaKategori!;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -61,7 +59,7 @@ class EditKategoriView extends StatelessWidget {
                     id: kategori.id,
                     namaKategori: namaKategoriController.text,
                   );
-                  controller.updatedKategori(kategori.id!, updatedKategori);
+                  controller.updateKategori(kategori.id!, updatedKategori);
                   Get.back();
                 },
                 style: ElevatedButton.styleFrom(

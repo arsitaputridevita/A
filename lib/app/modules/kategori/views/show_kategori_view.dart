@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../data/kategori/kategori_model.dart';
+import '../../../data/kategori_model.dart';
 
 class ShowKategoriView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Datakategori kategori = Get.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(

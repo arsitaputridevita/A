@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:myapp/app/data/kategori/kategori_model.dart';
+import '../../../data/kategori_model.dart';
 import '../controllers/kategori_controller.dart';
 
 class CreateKategoriView extends StatelessWidget {
@@ -63,7 +63,8 @@ class CreateKategoriView extends StatelessWidget {
                   Get.back();
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 50, vertical: 15),
                   backgroundColor: Colors.deepPurple,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
