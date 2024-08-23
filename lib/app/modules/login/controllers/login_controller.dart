@@ -22,12 +22,13 @@ class LoginController extends GetxController {
         'password': passwordController.text,
       },
     );
+
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       final token = data['access_token'];
 
       box.write('access_token', token);
-      Get.offAllNamed('/button-menu');
+      Get.offAllNamed('/bottom-menu');
     } else {
       Get.snackbar('Error', 'Login failed. Please check your credentials.',
           snackPosition: SnackPosition.BOTTOM);
@@ -41,4 +42,4 @@ class LoginController extends GetxController {
     passwordController.dispose();
     super.dispose();
   }
-  }
+}
